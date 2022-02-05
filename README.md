@@ -1,1 +1,1 @@
-# lessons
+Материалы к занятиям курса OTUS Java-Bootcamp
