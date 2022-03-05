@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ex1CalculatorSingleOperation {
     public static void main(String[] args) {
         simpleImplementation();
-        // inputFormatGuardImplementation();
+        inputFormatGuardImplementation();
     }
 
     private static void simpleImplementation() {
@@ -55,6 +55,9 @@ public class Ex1CalculatorSingleOperation {
                 // если пользователь ввел не число, то мы сразу проваливаемся в catch блок, isCorrectA останется false
                 isCorrectA = true;
             } catch (InputMismatchException e) {
+                /* чтобы сканнер 'прочитал' неккорректное введеное значение и не зависал в бесконечной попытке
+                   это значение интерпретировать как целое число */
+                scanner.next();
                 System.out.println("Необходимо ввести целое число!");
             }
         }
@@ -65,9 +68,12 @@ public class Ex1CalculatorSingleOperation {
 
         do {
             try {
-                b = new Scanner(System.in).nextInt(); // бага в сканнере после первой ошибке чтения
+                b = scanner.nextInt(); // бага в сканнере после первой ошибке чтения
                 isCorrectB = true;
             } catch (InputMismatchException e) {
+                /* чтобы сканнер 'прочитал' неккорректное введеное значение и не зависал в бесконечной попытке
+                   это значение интерпретировать как целое число */
+                scanner.next();
                 System.out.println("Необходимо ввести целое число!");
             }
         } while (!isCorrectB);
