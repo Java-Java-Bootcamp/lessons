@@ -11,7 +11,7 @@ class MyListTest {
 	private void checkByIndex(Integer ... expected) {
 		assertEquals(expected.length, list.size());
 		for (int i = 0; i < expected.length; ++i)
-			assertEquals(expected[i], list.get(i));
+			assertEquals(expected[i], list.get(i), "element at " + i);
 	}
 
 	@Test
@@ -30,6 +30,18 @@ class MyListTest {
 		assertEquals(2, list.size());
 
 		checkByIndex(1, 2);
+	}
+
+	@Test
+	void addManyElements() {
+		for (int i = 0; i < 10000; ++i) {
+			list.add(i);
+		}
+		assertEquals(10000, list.size());
+
+		for (int i = 0; i < 10000; ++i) {
+			assertEquals(i, list.get(i), "element at " + i);
+		}
 	}
 
 	@Test
