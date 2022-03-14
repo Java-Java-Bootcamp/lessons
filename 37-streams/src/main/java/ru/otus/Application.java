@@ -2,7 +2,9 @@ package ru.otus;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Application {
 	public static List<Worker> getYoungWorkers(List<Worker> workers) {
@@ -18,18 +20,34 @@ public class Application {
 				.toList();
 	}
 
-	public static Map<Sex, Integer> getMaleAndFemaleCount(List<Worker> workers) {
+	public static Map<Sex, Long> getMaleAndFemaleCount(List<Worker> workers) {
 		return workers.stream()
-				.collect(HashMap::new,
-						(cnt, w) -> cnt.compute(w.getSex(),
-								(ignored, cur) -> cur == null ? 1 : cur + 1),
-						(a, b) -> b.forEach(
-								(sex, cnt) -> a.compute(sex,
-										(ignored, cur) -> cur == null ? cnt : cur + cnt))
-				);
+				.collect(Collectors.groupingBy(Worker::getSex, Collectors.counting()));
+	}
+
+	public static Map<String, List<Worker>> groupByTowns(List<Worker> workers) {
+		return workers.stream()
+				.collect(Collectors.groupingBy(Worker::getWorkTown));
+	}
+
+	public static List<String> workersInfo(List<Worker> workers) {
+		return workers.stream()
+				.map(it -> String.format("%s, %s, %s, %s",
+						it.getSurname().toUpperCase(),
+						it.getName().toUpperCase(),
+						it.getAge(),
+						it.getWorkTown()))
+				.toList();
+	}
+
+	public static List<Worker> getWorkersRetire(List<Worker> workers, int yearsToRetire) {
+		return workers.stream()
+				.filter(w -> w.getAge() >= yearsToRetire)
+				.toList();
 	}
 
 	public static void main(String[] args) {
-
+		var w = new Worker("Ivan", "Ivanov", Sex.MALE, 10, "", "");
+		System.out.println(w);
 	}
 }
