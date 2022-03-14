@@ -1,9 +1,11 @@
 package ru.otus;
 
+import javax.swing.text.html.Option;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -18,6 +20,12 @@ public class Application {
 				.parallel()
 				.filter(w -> w.getAge() < 30)
 				.toList();
+	}
+
+	public static Optional<Worker> getFirstWorkerOlder25(List<Worker> workers) {
+		return workers.stream()
+				.filter(w -> w.getAge() > 25)
+				.findFirst();
 	}
 
 	public static Map<Sex, Long> getMaleAndFemaleCount(List<Worker> workers) {
