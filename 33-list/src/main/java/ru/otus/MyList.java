@@ -5,8 +5,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
-@SuppressWarnings("unchecked")
 public class MyList<E> implements List<E> {
 	private Object[] data = new Object[5];
 	private int size;
@@ -24,7 +25,7 @@ public class MyList<E> implements List<E> {
 	@Override
 	public boolean add(E e) {
 		if (data.length == size) {
-			data = Arrays.copyOf(data, (int)(data.length * 1.5));
+			data = Arrays.copyOf(data, (int) (data.length * 1.5));
 		}
 
 		data[size++] = e;
@@ -42,34 +43,72 @@ public class MyList<E> implements List<E> {
 	public E get(int index) {
 		if (index >= size || index < 0)
 			throw new IndexOutOfBoundsException(index + " >= " + size);
-		return (E)data[index];
+		//noinspection unchecked
+		return (E) data[index];
 	}
 
 	@Override
 	public E set(int index, E element) {
-		if (index >= size)
+		if (index >= size || index < 0)
 			throw new IndexOutOfBoundsException(index + " >= " + size);
+		var prev = data[index];
 		data[index] = element;
-		return element;
+		//noinspection unchecked
+		return (E) prev;
 	}
 
 	@Override
 	public boolean contains(Object o) {
-		throw new UnsupportedOperationException();
+		for (var e : this)
+			if (Objects.equals(e, o))
+				return true;
+		return false;
+	}
+
+	private class MyListIterator implements Iterator<E> {
+		int pos;
+
+		@Override
+		public boolean hasNext() {
+			return pos < size();
+		}
+
+		@Override
+		public E next() {
+			if (!hasNext()) throw new NoSuchElementException();
+			//noinspection unchecked
+			return (E) data[pos++];
+		}
 	}
 
 	@Override
 	public Iterator<E> iterator() {
-		throw new UnsupportedOperationException();
+		int xx = 2;
+		return new Iterator<>() {
+			int pos;
+
+			@Override
+			public boolean hasNext () {
+				return pos < size() && xx == 2;
+			}
+
+			@Override
+			public E next () {
+				if (!hasNext()) throw new NoSuchElementException();
+				//noinspection unchecked
+				return (E) data[pos++];
+			}
+		};
 	}
 
 	@Override
 	public Object[] toArray() {
-		throw new UnsupportedOperationException();
+		return Arrays.copyOf(data, size);
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
+
 		throw new UnsupportedOperationException();
 	}
 
