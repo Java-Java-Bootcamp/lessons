@@ -12,4 +12,6 @@ public interface MoneyCell {
     void getMoney(int amount) throws Exception;
 
     boolean canGet(int amount);
+
+    void saveState();
 }

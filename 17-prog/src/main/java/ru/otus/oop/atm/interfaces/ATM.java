@@ -8,4 +8,6 @@ public interface ATM {
     void depositMoney(Denomination denomination, int amount);
 
     AccountState accountState();
+
+    void saveState();
 }

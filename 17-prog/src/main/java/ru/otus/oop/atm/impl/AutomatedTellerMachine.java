@@ -10,6 +10,7 @@ import ru.otus.oop.atm.util.BanknotesNumber;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class AutomatedTellerMachine implements ATM {
     private final AccountState state = new AccountStateImpl();
@@ -51,5 +52,10 @@ public class AutomatedTellerMachine implements ATM {
     @Override
     public AccountState accountState() {
         return state;
+    }
+
+    @Override
+    public void saveState() {
+        cells.forEach(MoneyCell::saveState);
     }
 }

@@ -11,8 +11,8 @@ public class AccountStateImpl implements AccountState {
     }
 
     @Override
-    public boolean canGetMoney() {
-        return false;
+    public boolean canGetMoney(int value) {
+        return amount >= value;
     }
 
     @Override

@@ -38,4 +38,9 @@ public abstract class AbstractMoneyCell implements MoneyCell {
     public boolean canGet(int amount) {
         return banknotesNumber >= amount;
     }
+
+    @Override
+    public void saveState() {
+        // TODO сохранить состояние ячейки
+    }
 }
