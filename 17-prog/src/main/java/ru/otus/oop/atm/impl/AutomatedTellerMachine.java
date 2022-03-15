@@ -10,16 +10,15 @@ import ru.otus.oop.atm.util.BanknotesNumber;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class AutomatedTellerMachine implements ATM {
     private final AccountState state = new AccountStateImpl();
-    private final List<MoneyCell> cells = new ArrayList<>();
+    private List<MoneyCell> cells = new ArrayList<>();
 
     public AutomatedTellerMachine() {
         cells.add(new FiftyMoneyCell(10));
         cells.add(new FiveHundredMoneyCell(10));
-        cells.add(new FiveHundredMoneyCell(10));
+        cells.add(new FiveThousandMoneyCell(10));
         cells.add(new HundredMoneyCell(10));
         cells.add(new ThousandMoneyCell(10));
         cells.add(new TwoHundredMoneyCell(10));
@@ -56,6 +55,13 @@ public class AutomatedTellerMachine implements ATM {
 
     @Override
     public void saveState() {
-        cells.forEach(MoneyCell::saveState);
+        cells.forEach(MoneyCell::saveStateAsJackson);
+    }
+
+    @Override
+    public void load() {
+        List<MoneyCell> temp = new ArrayList<>();
+        cells.forEach(moneyCell -> temp.add(moneyCell.deserializeFromJson()));
+        cells = temp;
     }
 }

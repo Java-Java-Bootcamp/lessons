@@ -15,5 +15,8 @@ public class Application {
             System.out.println(e.getMessage());
         }
 
+        atm.saveState();
+        atm.load();
+
     }
 }

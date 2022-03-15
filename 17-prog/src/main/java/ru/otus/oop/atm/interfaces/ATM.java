@@ -10,4 +10,6 @@ public interface ATM {
     AccountState accountState();
 
     void saveState();
+
+    void load();
 }
