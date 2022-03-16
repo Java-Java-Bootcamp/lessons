@@ -42,6 +42,13 @@ public class ThreadedServer implements AutoCloseable {
 			catch (Exception e) {
 				System.out.println(socket.getPort() + " exception: " + e);
 			}
+			finally {
+				try {
+					socket.close();
+				}
+				catch (Exception e) {
+				}
+			}
 		}
 	}
 }

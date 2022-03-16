@@ -1,6 +1,7 @@
 package ru.otus;
 
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server implements AutoCloseable {
 	private final ServerSocket serverSocket;
@@ -13,7 +14,7 @@ public class Server implements AutoCloseable {
 		System.out.println("listen");
 
 		while (true) {
-			var socket = serverSocket.accept();
+			Socket socket = serverSocket.accept();
 			try {
 				System.out.println("accept: " + socket.getPort());
 				try (var client = new ClientHandler(socket)) {
