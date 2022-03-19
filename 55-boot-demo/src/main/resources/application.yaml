@@ -1,0 +1,27 @@
+#springdoc:
+#  swagger-ui:
+#    use-root-path: true
+
+#logging:
+#  level:
+#    root: info
+
+
+server:
+  port: 8090
+
+
+client-creator:
+  enabled: true
+  clients:
+    - fullname: Ivan
+      phone: 112233
+    - fullname: Petr
+      phone: 445566
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
