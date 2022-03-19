@@ -16,9 +16,9 @@ public class DemoApplication {
 		System.out.println("Count: " + ctx.getBeanDefinitionCount());
 		System.out.println(Arrays.toString(ctx.getBeanDefinitionNames()));
 
-		//ClientRepository repository = ctx.getBean(ClientRepository.class);
-		//repository.addClient(new Client("Ivan", BigInteger.valueOf(112233)));
-		//repository.addClient(new Client("Petr", BigInteger.valueOf(445566)));
+		ClientRepository repository = ctx.getBean(ClientRepository.class);
+		repository.addClient(new Client("Ivan", BigInteger.valueOf(112233)));
+		repository.addClient(new Client("Petr", BigInteger.valueOf(445566)));
 	}
 
 }

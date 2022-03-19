@@ -7,12 +7,12 @@
 #    root: info
 
 
-server:
-  port: 8090
+#server:
+#  port: 8090
 
 
 client-creator:
-  enabled: true
+  enabled: false
   clients:
     - fullname: Ivan
       phone: 112233
