@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersService {
 
-  private List<User> users = new ArrayList<>() {{
+  private List<User> users  = new ArrayList<>() {{
     add(new User("agafonov", "Олег", "Агафонов"));
   }};
 
@@ -38,5 +38,12 @@ public class UsersService {
     User user = getUser(newUser.getAccount());
     user.setName(newUser.getName());
     user.setLastname(newUser.getLastname());
+  }
+
+  public void deleteUser(String account) {
+    User user = getUser(account);
+    if (user != null) {
+      users.remove(user);
+    }
   }
 }

@@ -8,7 +8,20 @@ POST http://localhost:8081/users
 Content-Type: application/json
 
 {
-  "account": "petrov",
-  "name": "Иван",
-  "lastname": "Петров"
+  "account": "agafonov",
+  "name": "Олег",
+  "lastname": "Агафонов"
 }
+
+###
+PUT http://localhost:8081/users/petrov
+Content-Type: application/json
+
+{
+  "account": "petrov",
+  "name": "Андрей",
+  "lastname": "Агафонов"
+}
+
+###
+DELETE http://localhost:8081/users/petrov
