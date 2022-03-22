@@ -1,0 +1,14 @@
+GET http://localhost:8081/users
+
+###
+GET http://localhost:8081/users/petrov
+
+###
+POST http://localhost:8081/users
+Content-Type: application/json
+
+{
+  "account": "petrov",
+  "name": "Иван",
+  "lastname": "Петров"
+}
