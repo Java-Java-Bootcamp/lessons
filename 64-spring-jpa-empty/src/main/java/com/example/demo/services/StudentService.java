@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 
 @Service
-// @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class StudentService {
 
     private final StudentRepository studentRepository;
