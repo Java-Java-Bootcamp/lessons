@@ -10,7 +10,3 @@ spring:
       data-locations: classpath*:db/data.sql
   jpa:
     show-sql: true
-
-#  spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
-#
-#  spring.jpa.hibernate.ddl-auto=update
