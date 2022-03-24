@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    hikari:
+      maximumPoolSize: 5
+    url: jdbc:postgresql://localhost:15432/postgres
+    username: postgres
+    password: test
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      dll-auto: update
