@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import com.example.demo.exceptios.EntityNotFoundException;
 import com.example.demo.model.Student;
 import com.example.demo.rpostiory.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -17,24 +16,19 @@ public class StudentService {
     }
 
     public Student getStudentById(String id) {
-        Student student = studentRepository.getStudentById(id);
-
-        if (student == null)
-            throw new EntityNotFoundException("Student with id '" + id + "' was not found");
-
-        return student;
+        return studentRepository.getById(id);
     }
 
     public Collection<Student> getStudents() {
-        return studentRepository.getStudents();
+        return studentRepository.findAll();
     }
 
     public String createStudent(Student student) {
-        return studentRepository.createStudent(student);
+        return studentRepository.save(student).getId();
     }
 
     public void deleteStudentById(String id) {
-        studentRepository.deleteStudentById(id);
+        studentRepository.deleteById(id);
     }
 
 }

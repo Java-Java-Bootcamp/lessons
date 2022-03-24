@@ -7,10 +7,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -59,7 +60,10 @@ public class StudentService {
     public void updateStudent(String id, String firstName, String lastName) {
         System.out.format("updateStudent(id: %s, firstName: %s, lastName: %s)\n", id, firstName, lastName);
 
-        updateFirstName(id, firstName);
+        context.getBean(StudentService.class).updateFirstName(id, firstName);
+//        context.getBean(StudentService.class).updateLastName(id, lastName);
+
+//        updateFirstName(id, firstName);
         updateLastName(id, lastName);
     }
 
@@ -81,6 +85,7 @@ public class StudentService {
         });
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateFirstName(String id, String firstName) {
         System.out.format("updateFirstName(id: %s, firstName: %s)\n", id, firstName);
 
@@ -91,6 +96,7 @@ public class StudentService {
         }
     }
 
+    @Transactional
     public void updateLastName(String id, String lastName) {
         System.out.format("updateLastName(id: %s, lastName: %s)\n", id, lastName);
 

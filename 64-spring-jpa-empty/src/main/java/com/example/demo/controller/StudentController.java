@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.exceptios.EntityNotFoundException;
+import com.example.demo.dto.StudentDto;
 import com.example.demo.model.Student;
 import com.example.demo.services.StudentService;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 public class StudentController {
@@ -26,18 +28,21 @@ public class StudentController {
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudentById(@PathVariable("id") String id) {
-        return studentService.getStudentById(id);
+    public StudentDto getStudentById(@PathVariable("id") String id) {
+        Student student = studentService.getStudentById(id);
+        return student.createDto();
     }
 
     @GetMapping("/students")
-    public Collection<Student> getStudents() {
-        return studentService.getStudents();
+    public Collection<StudentDto> getStudents() {
+        Collection<Student> students = studentService.getStudents();
+        return students.stream().map(Student::createDto).collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/students", produces = "application/text")
-    public String createStudent(@RequestBody Student student) {
+    public String createStudent(@RequestBody StudentDto dto) {
+        Student student = new Student(dto);
         return studentService.createStudent(student);
     }
 

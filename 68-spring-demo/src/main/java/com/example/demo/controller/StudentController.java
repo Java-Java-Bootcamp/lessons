@@ -53,8 +53,8 @@ public class StudentController {
             @PathVariable("id") String id,
             @RequestParam(name = "firstName", required = false) String firstName,
             @RequestParam(name = "lastName", required = false) String lastName) {
-//        studentService.updateStudent(id, firstName, lastName);
-        studentService.updateStudentManual(id, firstName, lastName);
+        studentService.updateStudent(id, firstName, lastName);
+//        studentService.updateStudentManual(id, firstName, lastName);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
