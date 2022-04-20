@@ -13,38 +13,38 @@ import static org.junit.Assert.assertNotNull;
 public class TestLegacyServiceWithReflection {
 
     @Test
-    public void readingPrivateField() {
-        TemperatureService serviceToBeTested = new TemperatureService();
-        serviceToBeTested.init();
-        try {
-            Field field = serviceToBeTested.getClass().getDeclaredField("privateField");
-            field.setAccessible(true);
-            String privateFieldValue = (String) field.get(serviceToBeTested);
+    public void readPrivateFieldValue() {
+        TemperatureService service = new TemperatureService();
+        service.init();
 
-            System.out.println("value inside: " + privateFieldValue);
-            assertNotNull(privateFieldValue);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        try {
+            Field field = service.getClass().getDeclaredField("temperature");
+            field.setAccessible(true);
+            Integer temperature = (Integer) field.get(service);
+            System.out.println("private field value is: " + temperature);
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+
         }
     }
 
     @Test
     public void writePrivateField() {
-        TemperatureService serviceToBeTested = new TemperatureService();
-        serviceToBeTested.init();
+        TemperatureService service = new TemperatureService();
+        service.init();
+
         try {
-            Field field = serviceToBeTested.getClass().getDeclaredField("privateField");
+            Field field = service.getClass().getDeclaredField("temperature");
             field.setAccessible(true);
-            field.set(serviceToBeTested, "new value");
-            String privateFieldValue = (String) field.get(serviceToBeTested);
+            field.set(service, 33);
 
-            System.out.println("value inside: " + privateFieldValue);
+            Integer temperature = (Integer) field.get(service);
+            System.out.println("private field value is: " + temperature);
 
-            assertEquals("new value", privateFieldValue);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-
+            System.out.println("exception: " + e.getMessage());
         }
     }
-//
+
     @Test
     public void callMethod() {
         try {

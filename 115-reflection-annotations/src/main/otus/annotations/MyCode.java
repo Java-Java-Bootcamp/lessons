@@ -1,8 +1,12 @@
 package main.otus.annotations;
 
+
 public class MyCode {
 
-    @MyDepricated(dateOutdated = "2020-07-06")
+    /*
+    * this method is outdated since 2010
+    * use instead new another call
+    * */
     public String veryOldLegacyCode(){
         return "12";
     }

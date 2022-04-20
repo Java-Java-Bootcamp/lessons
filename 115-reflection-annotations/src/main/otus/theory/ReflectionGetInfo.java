@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 public class ReflectionGetInfo {
     public static void main(String[] args) throws NoSuchMethodException {
-
         Class<DemoClass> clazz = DemoClass.class;
         System.out.println("Class Name:" + clazz.getSimpleName());
 
