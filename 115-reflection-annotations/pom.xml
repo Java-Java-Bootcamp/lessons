@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.otus</groupId>
-    <artifactId>annotations</artifactId>
+    <artifactId>annotationsreflection</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <sourceDirectory>src</sourceDirectory>
