@@ -17,16 +17,24 @@ public class FileChannelDemo
       long pos;
       log.info("Position = {}", (pos = fc.position()));
       log.info("size: {}", fc.size());
-      String msg = "This is a test message.";
-      ByteBuffer buffer = ByteBuffer.allocateDirect(msg.length() * 2);
-      buffer.asCharBuffer().put(msg);
+
+//      String msg = "This is a test message.";
+
+      ByteBuffer buffer = ByteBuffer.allocateDirect(200);
+      /*buffer.asCharBuffer()
+              .put(msg);
+
       fc.write(buffer);
       fc.force(true);
+
       log.info("position: {}", fc.position());
-      log.info("size: {}", fc.size());
+      log.info("size: {}", fc.size());*/
+
+      // File read
       buffer.clear();
       fc.position(pos);
       fc.read(buffer);
+
       buffer.flip();
       StringBuilder contentBuilder = new StringBuilder();
       while (buffer.hasRemaining()) {

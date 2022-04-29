@@ -24,7 +24,7 @@ public class CharBufferDemo {
 
     public static void main(String[] args) {
 
-        CharBuffer buffer = CharBuffer.allocate(50);
+        CharBuffer buffer = CharBuffer.allocate(250);
 
         for (String quote : quotes) {
             // Fill the buffer.

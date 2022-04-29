@@ -31,23 +31,23 @@ public class SelectorServer
       ss.bind(new InetSocketAddress(port));
       ssc.configureBlocking(false);
 
-      Selector s = Selector.open();
-      ssc.register(s, SelectionKey.OP_ACCEPT);
+      Selector selector = Selector.open();
+      ssc.register(selector, SelectionKey.OP_ACCEPT);
 
       while (true)
       {
-         int n = s.select();
+         int n = selector.select();
          if (n == 0)
             continue;
-         Iterator it = s.selectedKeys().iterator();
+         Iterator it = selector.selectedKeys().iterator();
          while (it.hasNext())
          {
             SelectionKey key = (SelectionKey) it.next();
             if (key.isAcceptable())
             {
-               SocketChannel sc;
-               sc = ((ServerSocketChannel) key.channel()).accept();
-               if (sc == null)
+               SocketChannel channel;
+               channel = ((ServerSocketChannel) key.channel()).accept();
+               if (channel == null)
                   continue;
                log.info("Receiving connection");
                bb.clear();
@@ -55,8 +55,8 @@ public class SelectorServer
                bb.flip();
                log.info("Writing current time");
                while (bb.hasRemaining())
-                  sc.write(bb);
-               sc.close();
+                  channel.write(bb);
+               channel.close();
             }
             it.remove();
          }

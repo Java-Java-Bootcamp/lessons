@@ -15,7 +15,9 @@ public class ByteBufferDemo
       log.info("Position: {}", buffer.position());
       log.info("Remaining: {}", buffer.remaining());
 
-      buffer.put((byte) 10).put((byte) 20).put((byte) 30);
+      buffer.put((byte) 10)
+              .put((byte) 20)
+              .put((byte) 30);
 
       log.info("Capacity: {}", buffer.capacity());
       log.info("Limit: {}", buffer.limit());
