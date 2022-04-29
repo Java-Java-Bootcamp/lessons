@@ -1,4 +1,4 @@
-package excersises;
+package exersises;
 
 public @interface NoThreadSafe {
 }

@@ -1,4 +1,4 @@
-package excersises;
+package exersises;
 
 import lombok.extern.slf4j.Slf4j;
 
